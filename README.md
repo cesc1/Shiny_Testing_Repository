@@ -1,12 +1,22 @@
 Hello Golem
 ================
 Francesc Aguirre
-07/07/2022
+18/10/2022
 
 # Goal
 
 The purpose of this repo is having a safe space to try new tools and
 methods in Shiny apps.
+
+# Apps:
+
+-   **App01:** Example from [SaturnCloud Shiny
+    styling](https://github.com/saturncloud/examples/tree/main/examples/workshop-r-shiny-styling)
+    but using golem, renv, modules…
+
+-   **App02:**
+
+-   **App03:**
 
 # Resources
 

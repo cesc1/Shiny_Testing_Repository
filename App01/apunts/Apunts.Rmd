@@ -1,0 +1,124 @@
+---
+title: "Apunts Webinar: Styling Shiny"
+author: "Francesc Aguirre"
+date: '2022-10-15'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Intro
+
+Anotare apunts sobre el seguiment del [Webinar](https://www.youtube.com/watch?v=GZmzj8a4liY).
+
+# HTML
+
+Apps shiny són html. Aquests dos codis són equivalents:
+
+```{r eval = F}
+sidebarLayout(
+  sidebarPanel(),
+  mainPanel()
+)
+```
+
+```{html eval = F}
+<div class="row">
+  <div class="col-sm-4">
+    <from class="well" role="complementary"></form>
+  </div>
+  <div class="col-sm-8" role="main"></div>
+</div>
+```
+
+
+# Bootstrap
+
+Shiny utilitza bootstrap 3.
+
+Amb una mica de coneixement de bootstrap, podem canviar molt l'estil: 
+
+```{r eval = F}
+```{r eval = F}
+sidebarPanel(
+  div(class="text-danger",
+      sliderInput("bins",
+                  "Number of bins:",
+                  "min = 1",
+                  max = 50,
+                  value = 30)
+    
+  )
+)
+```
+
+També es poden afegir classes:
+
+```{r eval = F}
+actionButton("action", "Search", class = "btn-primary")
+```
+
+En comptes d'utilitzar funcions Shiny es pot utilitzar html i bootstrap. Exemples del que s'ha fet en el webinar:
+
+- `BootstrapPage()` en comptes de `fluidPage()` ja que no te defaults customitzats.
+- `div(class = "container,)` en comptes de `sidebarLayout()` (container te una mica de paddings)
+- `div(class = "row, div(class = "col-6",))` aixi podem fer una matriu on volem tenir les coses. Hi ha 12 columnes, per tant si fem col-6 estem agafant la meitat. ([bootstrap docs](https://getbootstrap.com/docs/5.0/layout/grid/))
+- `div(class = "bg-light my-5 py-3",)` crea un background amb algo de padding (`my` es fora del contenidor, `py` es dins del contenidor).
+- `div(class = "d-grid gap-2",` crea un grid per ajuntar botons verticalment.
+- Utilitzar renderUI per customitzar text reactiu.
+- Per costumitzar estil de lletra, baixar de "google styles" l'html, enganxar en HTML a la web, i per exemple es pot aplicar l'estil amb una classe de css en la classe "body" (per aplicar a tot) o a classes particulars.
+- Favicons, baixar en [Real Favicon Generator](https://realfavicongenerator.net/).
+
+
+## bslib
+
+Llibreria per costumitzar bootstrap. 
+
+- Canviar versio de bootstrap.
+- Canviar valor de variables. Ex: "text-danger".
+
+```{r eval = F}
+theme = bs_theme(version = 5, danger = "#FFA000"),
+```
+
+Per exemple, si volem canviar un button, podem posar que el button sigui "primary:
+
+```{r eval = F}
+      actionButton("guess_cat", "Guess Cats", class = "btn-primary text-white-50"),
+```
+
+I despres canviar el color d'aquesta classe (dins de fluidpage):
+
+```{r eval = F}
+theme = bslib::bs_theme(version = 5,
+                          primary = "#FF6622"),
+```
+
+Per saber totes aquestes classes bootstrap:
+
+Googlejar per ex: "bootstrap 5 text color"
+
+
+## fitxers .css
+
+Es pot afegir custom css classes en el fitxer www:
+
+```{css eval = F}
+.custom-buton {
+  background-color: #F26D7E;
+  border-color: #A10E21;
+}
+```
+
+```{r eval = F}
+header = 
+  tags$head(
+    tags$lirk(rel = "stylesheet",)
+  )
+```
+
+## fitxers .html
+
+També pots escriure fitxers sensers en html, i carregarlos a shiny.

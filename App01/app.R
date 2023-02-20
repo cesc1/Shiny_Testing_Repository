@@ -1,76 +1,21 @@
 library(shiny)
 
+source("R/utils_ui.R")
 source("helper-functions.R")
+
 
 # Swap fluidPage() to bootstrapPage() for more control with bootstrap.
 ui <- bootstrapPage(
-  # UI preamble ---------------------
+  # UI preamble ---------------------------------------
   
-  # Afegir theme per carregar bootstrap5 i variables SASS
-  theme = bslib::bs_theme(version = 5, primary = "#FF6622"),
+  # Add bs5 and sass variable
+  theme = ui_bsTheme(),
   
-  # HTML head, metadata que el viewer no veu:
-  tags$head(
-    tags$title("Pet guesser"),
-    tags$meta(name = "description", content = "GUess if the name is for a cat or dog"),
-    
-    # Afegir Favicon desde Real Favicon Generator
-    HTML('<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">'),
-    
-    # Afegir font desde Google Fonts
-    HTML(glue('
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=',
-              'Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-         rel="stylesheet">'))
-  ),
+  # HTML head (metadata
+  ui_head(),
 
-  # Afegir custom css
-  tags$head(
-    tags$link(rel = "stylesheet", 
-              type = "text/css", 
-              href = "site.css")),
-  
-  # Seccio abans de l'app perque es vegi be ---------------
-  # section es per una seccio de la pagina
-  tags$section(class = "py-5",
-               
-               # Container afegeix espais a esquerra i dreta
-               div(class = "container",
-                   
-                   # Fem una fila amb una sola columna per centrar contingut
-                   div(class = "row",
-                     div(class = "col-10 offset-1 col-md-6 offset-md-3 text-center",
-                         
-                         # SaturnCloud Logo
-                         # img-fluid resizes amb la pantalla
-                         img(height = "48",
-                             class = "py-2 img-fluid",
-                             src = "saturncloud-logo-1.svg"
-                         ),
-                         
-                         # El gat i el gos amb custom css
-                         div(class = "row",
-                             div(class = "col-6 offset-3",
-                                 div(class = "overlapping-images",
-                                     img(src = "dog.jpg", class = "img-circle img-left"),
-                                     img(src = "cat.jpg", class = "img-circle img-right")
-                                 )
-                             )
-                         ),
-                         
-                         # Titol
-                         h1("Pet name species guesser"),
-                         p(glue("Try and guess if a pet name is more popular ",
-                                "with cats or dogs in the Seattle pet license data."))
-                     )
-                   )
-               )
-  ),
-  
+  # Logo, images and title
+  ui_pretty(),
   
   # Input/output section ---------------------------------------
  
@@ -81,11 +26,12 @@ ui <- bootstrapPage(
               div(class = "col-lg-6",
                   div(class = "bg-white rounded border shadow m-1 p-2 h-100",
                       #textInput en shiny no es pot editar per tant:
-                      # nolint start
-                      HTML('<div class="form-group shiny-input-container w-100">
-            <label class="control-label" id="name-label" for="name">Pet name</label>
-            <input id="name" type="text" class="form-control shiny-bound-input" value="">
-          </div>'),
+                      # nolint start (id "name")
+                      HTML(glue(
+                        '<div class="form-group shiny-input-container w-100">',
+                        '<label class="control-label" id="name-label" for="name">Pet name</label>',
+                        '<input id="name" type="text" class="form-control shiny-bound-input" value=""></div>'
+                      )),
                       # nolint end
                       div(class = "d-grid gap-2",
                           actionButton("guess_cat", "Guess Cats", class = "btn-primary text-white"),

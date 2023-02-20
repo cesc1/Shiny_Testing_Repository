@@ -1,7 +1,7 @@
 ---
-title: "Hello Golem"
-author: "Francesc Aguirre"
-date: "`r format(Sys.time(), '%d/%m/%Y')`"
+title: "Shiny App Practice"
+author: FALSE
+date: FALSE
 output: github_document
 editor_options: 
   chunk_output_type: console
@@ -11,14 +11,14 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Goal {.unnumbered}
+# Goal {-}
 
 The purpose of this repo is having a safe space to try new tools and methods in Shiny apps.
 
 
 # Apps:
 
-- **App01:** Example from [SaturnCloud Shiny styling](https://github.com/saturncloud/examples/tree/main/examples/workshop-r-shiny-styling) but using golem, renv, modules...
+- **App01:** Example from [SaturnCloud Shiny styling](https://github.com/saturncloud/examples/tree/main/examples/workshop-r-shiny-styling) but using golem, renv, modules, CI...
 
 - **App02:** 
 
